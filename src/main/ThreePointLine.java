@@ -29,14 +29,23 @@ public class ThreePointLine {
         return sum;
     }
 
+    private int calculateDistance(int[][] points) {
+        int constant = 0;
+
+        double inclination = (points[0][Y_POSITION] - points[1][Y_POSITION]) / (points[0][X_POSITION] - points[1][X_POSITION]);
+        return 0;
+    }
+
     public static void main(String[] args) {
         ThreePointLine threePointLine = new ThreePointLine();
 
         int[][] input = {{0, 0}, {1, 1}, {2, 2}};
         int[][] input2 = {{0, 0}, {1, 2}, {2, 2}};
         int[][] input3 = {{0, 1}, {1, 1}, {2, 1}};
+        int[][] input4 = {{-1, -1}, {0, 0}, {2, 2}};
         System.out.println("{0, 0}, {1, 1}, {2, 2} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input));
         System.out.println("{0, 0}, {1, 2}, {2, 2} 입력 시 false 를 리턴한다. : " + threePointLine.isStraightLine(input2));
         System.out.println("{0, 1}, {1, 1}, {2, 1} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input3));
+        System.out.println("{0, 1}, {1, 1}, {2, 1} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input4));
     }
 }
