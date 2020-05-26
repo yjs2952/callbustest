@@ -5,35 +5,40 @@ public class ThreePointLine {
     private static final int X_POSITION = 0;
     private static final int Y_POSITION = 1;
 
-    public boolean isStraightLine(int[]... point) {
-        double distanceSum = getSumOfDistanceByPoint(point);
-        double totalDistance = getFirstToLastPointDistance(point);
-        return distanceSum == totalDistance;
-    }
-
-    private double getFirstToLastPointDistance(int[][] points) {
-        return getDistance(points, points.length - 1, 0);
-    }
-
-    private double getDistance(int[][] points, int point1, int point2) {
-        return Math.sqrt((points[point1][X_POSITION] - points[point2][X_POSITION]) * (points[point1][X_POSITION] - points[point2][X_POSITION])
-                + (points[point1][Y_POSITION] - points[point2][Y_POSITION]) * (points[point1][Y_POSITION] - points[point2][Y_POSITION]));
-    }
-
-    private double getSumOfDistanceByPoint(int[][] point) {
-        double sum = 0;
-        for (int i = 1; i < point.length; i++) {
-            double distanceByPoint = getDistance(point, i, i - 1);
-            sum += distanceByPoint;
+    public boolean isStraightLine(int[]... points) {
+        if (isSamePositionXOrY(points)) {
+            return true;
         }
-        return sum;
+        return isSameInclinations(getInclinations(points));
     }
 
-    private int calculateDistance(int[][] points) {
-        int constant = 0;
+    private boolean isSameInclinations(double[] inclinations) {
+        for (int i = 1; i < inclinations.length; i++) {
+            if (inclinations[i - 1] != inclinations[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-        double inclination = (points[0][Y_POSITION] - points[1][Y_POSITION]) / (points[0][X_POSITION] - points[1][X_POSITION]);
-        return 0;
+    private double[] getInclinations(int[][] points) {
+        double[] inclinations = new double[points.length - 1];
+        for (int i = 1; i < points.length; i++) {
+            inclinations[i - 1] = (double) (points[i][Y_POSITION] - points[i - 1][Y_POSITION]) / (points[i][X_POSITION] - points[i - 1][X_POSITION]);
+        }
+        return inclinations;
+    }
+
+    private boolean isSamePositionXOrY(int[][] points) {
+        int sameXCount = 0;
+        int sameYCount = 0;
+
+        for (int i = 1; i < points.length; i++) {
+            sameXCount = points[i - 1][X_POSITION] == points[i][X_POSITION] ? ++sameXCount : sameXCount;
+            sameYCount = points[i - 1][Y_POSITION] == points[i][Y_POSITION] ? ++sameYCount : sameYCount;
+        }
+
+        return sameXCount == 2 || sameYCount == 2;
     }
 
     public static void main(String[] args) {
@@ -46,6 +51,6 @@ public class ThreePointLine {
         System.out.println("{0, 0}, {1, 1}, {2, 2} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input));
         System.out.println("{0, 0}, {1, 2}, {2, 2} 입력 시 false 를 리턴한다. : " + threePointLine.isStraightLine(input2));
         System.out.println("{0, 1}, {1, 1}, {2, 1} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input3));
-        System.out.println("{0, 1}, {1, 1}, {2, 1} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input4));
+        System.out.println("{-1, -1}, {0, 0}, {2, 2} 입력 시 true 를 리턴한다. : " + threePointLine.isStraightLine(input4));
     }
 }
