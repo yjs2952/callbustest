@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class CarNumber {
-
     private static final int NUMBER_SIZE = 9;
     private static final int COUNT = 4;
     private static final int[] CAR_NUMBER_COUNT = {2, 2, 1, 4};

@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 public class CallBus {
-
     private static final int MON = 0;
     private static final int SUN = 6;
     private static final int FIRST_HOUR_OF_DAY = 0;
@@ -32,7 +31,6 @@ public class CallBus {
     public static void main(String[] args) {
 
         CallBus callBus = new CallBus();
-
         System.out.println("월요일은 오전 시간 입력시 false 를 리턴한다. : " + callBus.isServiceTime(0, 3));
         System.out.println("수요일은 22시 입력시 true 를 리턴한다. : " + callBus.isServiceTime(2, 22));
         System.out.println("일요일은 오후 입력시 false 를 리턴한다. : " + callBus.isServiceTime(6, 23));
@@ -43,7 +41,6 @@ public class CallBus {
     }
 
     public enum DayOfWeek {
-
         MON(0, (hourOfDay) -> hourOfDay >= CallBus.BASE_START_HOUR),
         WED(2, (hourOfDay) -> hourOfDay <= CallBus.END_HOUR || hourOfDay >= CallBus.WED_START_HOUR),
         SUN(6, (hourOfDay) -> hourOfDay <= CallBus.END_HOUR),

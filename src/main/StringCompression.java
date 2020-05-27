@@ -5,10 +5,10 @@ public class StringCompression {
     public String compress(String any) {
         validationCheck(any);
 
-        StringBuilder sb = new StringBuilder();
         String[] split = any.split("");
         int sameCharCount = 0;
 
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < split.length; i += sameCharCount) {
             sameCharCount = getSameCharCount(split, i);
             sb.append(sameCharCount).append(split[i]);
@@ -19,8 +19,8 @@ public class StringCompression {
     public String decompress(String compressed) {
         validationCheck(compressed);
 
-        StringBuilder resultStringBuilder = new StringBuilder();
         String[] split = compressed.split("");
+        StringBuilder resultStringBuilder = new StringBuilder();
 
         for (int i = 0; i < split.length; i++) {
             StringBuilder numberStringBuilder = new StringBuilder();
@@ -42,7 +42,6 @@ public class StringCompression {
 
     private int getSameCharCount(String[] split, int index) {
         int sameCharCount = 1;
-
         while (true) {
             int currentIndex = index + sameCharCount;
             if (currentIndex >= split.length || !split[currentIndex - 1].equals(split[currentIndex])) {
